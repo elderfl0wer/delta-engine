@@ -19,6 +19,7 @@
 #include <math.h>
 
 #include "../../include/delta/math/vector2.h"
+#include "../../include/delta/math/vector3.h"
 
 vec2 vec2_add(vec2 *a, vec2 *b)
 {
@@ -49,7 +50,11 @@ double vec2_dot(vec2 *a, vec2 *b)
     return (a->x * b->x) + (a->y * b->y);
 }
 
-double vec2_cross(vec2 *a, vec2 *b)
+vec3 vec2_cross(vec2 *a, vec2 *b)
 {
-    
+    vec3 v1 = vec3_from_vec2(a);
+    vec3 v2 = vec3_from_vec2(b);
+
+    vec3 ans = {0, 0, a->x*b->y - b->x*a->y};
+    return ans;
 }

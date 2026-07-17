@@ -1,6 +1,10 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
-typedef struct {
+
+struct vec3_tag;
+typedef struct vec3_tag vec3;
+
+typedef struct vec2_tag {
     double x;
     double y;
 } vec2;
@@ -9,6 +13,7 @@ vec2 vec2_add(vec2 *a, vec2 *b);
 vec2 vec2_subtract(vec2 *a, vec2 *b);
 double vec2_length(vec2 *a);
 vec2 vec2_normalize(vec2 *a);
+vec3 vec2_cross(vec2 *a, vec2 *b);
 
 
 #endif /* VECTOR2_H */

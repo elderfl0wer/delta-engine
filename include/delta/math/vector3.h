@@ -1,9 +1,10 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
-#include "vector2.h"
+struct vec2_tag;
+typedef struct vec2_tag vec2;
 
-typedef struct {
+typedef struct vec3_tag {
     double x;
     double y;
     double z;
