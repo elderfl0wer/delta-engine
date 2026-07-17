@@ -11,5 +11,6 @@ typedef struct vec3_tag {
 } vec3;
 
 vec3 vec3_from_vec2(vec2 *v);
+double vec3_length(vec3 *v);
 
 #endif /* VECTOR3_H */

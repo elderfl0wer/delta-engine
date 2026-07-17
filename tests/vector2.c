@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "../include/delta/math/vector2.h"
+#include "../include/delta/math/vector3.h"
 
 int main()
 {
@@ -15,4 +16,7 @@ int main()
 
     vec2 normalizedFirst = vec2_normalize(&firstVector);
     printf("Normalized first vector (%f, %f)\n", normalizedFirst.x, normalizedFirst.y);
+
+    vec3 crossv = vec2_cross(&firstVector, &secondVector);
+    printf("Cross of the first & second vectors is (%f, %f, %f)", crossv.x, crossv.y, crossv.z);
 }

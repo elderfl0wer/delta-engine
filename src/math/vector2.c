@@ -55,6 +55,9 @@ vec3 vec2_cross(vec2 *a, vec2 *b)
     vec3 v1 = vec3_from_vec2(a);
     vec3 v2 = vec3_from_vec2(b);
 
-    vec3 ans = {0, 0, a->x*b->y - b->x*a->y};
+    vec3 cross = {0, 0, (a->x*b->y) - (b->x*a->y)};
+    double magnitude = vec3_length(&cross);
+    vec3 ans = {0, 0, cross.z / magnitude};
+
     return ans;
 }
