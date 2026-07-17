@@ -49,4 +49,7 @@ double vec2_dot(vec2 *a, vec2 *b)
     return (a->x * b->x) + (a->y * b->y);
 }
 
-double vec2_
+double vec2_cross(vec2 *a, vec2 *b)
+{
+    
+}
