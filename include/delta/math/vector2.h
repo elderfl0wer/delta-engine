@@ -14,6 +14,7 @@ vec2 vec2_subtract(vec2 *a, vec2 *b);
 double vec2_length(vec2 *a);
 vec2 vec2_normalize(vec2 *a);
 vec3 vec2_cross(vec2 *a, vec2 *b);
+vec2 vec2_scale(vec2 *v, const double factor);
 
 
 #endif /* VECTOR2_H */
