@@ -1,0 +1,16 @@
+# Testing 
+*.exe
+*.o
+build/
+bin/
+out/
+obj/
+
+
+# IDE/Editor 
+.vscode/
+
+# OS
+Thumbs.db
+
+

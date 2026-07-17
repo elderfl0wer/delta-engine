@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+#include "../include/delta/math/vector2.h"
+
+int main()
+{
+    vec2 firstVector = {2, 30};
+    vec2 secondVector = {-10, 4};
+
+    vec2 sum = vec2_add(&firstVector, &secondVector);
+    printf("Sum of vectors (%f, %f)\n", sum.x, sum.y);
+
+    double length = vec2_length(&firstVector);
+    printf("Length of first vector %f\n", length);
+
+    vec2 normalizedFirst = vec2_normalize(&firstVector);
+    printf("Normalized first vector (%f, %f)\n", normalizedFirst.x, normalizedFirst.y);
+}
