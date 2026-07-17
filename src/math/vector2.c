@@ -45,6 +45,11 @@ vec2 vec2_normalize(vec2 *a)
     return ans;
 }
 
+vec2 vec2_scale(vec2 *v, const double factor)
+{
+
+}
+
 double vec2_dot(vec2 *a, vec2 *b)
 {
     return (a->x * b->x) + (a->y * b->y);
