@@ -1,1 +1,0 @@
-- `src/math/vector2.c` --> `vec2_cross()` - Z coordinate returns in `inf` result. Produced in `tests/vector2.c`

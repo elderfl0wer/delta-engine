@@ -75,3 +75,9 @@ vec3 vec3_cross(vec3 *a, vec3 *b)
     vec3 ans = {a->y*b->z - b->y*a->z, b->x*a->z - a->x*b->z, a->x*b->y - b->x*a->y};
     return ans;
 }
+
+dircos3 cosine_from_vec3(vec3 *v)
+{
+    dircos3 ans = {v->x / vec3_length(v), v->y / vec3_length(v), v->z / vec3_length(v)};
+    return ans;
+}
