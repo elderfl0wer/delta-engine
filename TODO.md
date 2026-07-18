@@ -1,6 +1,6 @@
 # 2D Rigid-Body Physics Engine in C: Architectural Roadmap
 
-This technical roadmap outlines the complete architecture, memory layouts, and pipeline logic required to build a deterministic 2D rigid-body physics engine from scratch in C. Graphics implementation is intentionally deferred to the final stage, allowing the entire core system to be developed and verified using pure mathematical validation.
+This technical roadmap outlines the complete architecture, memory layouts, and pipeline logic required to build a deterministic 2D rigid-body physics engine from scratch in C. This roadmap is entirely text- and data-driven; no graphics code or visual rendering libraries are required.
 
 ---
 
@@ -27,8 +27,8 @@ This technical roadmap outlines the complete architecture, memory layouts, and p
 - [ ] **RigidBody Specifications**
   - [ ] Create a `RigidBody` struct layout.
   - [ ] Add linear kinematic state components: `position`, `velocity`, `acceleration`, `forceAccumulator`.
-  - [ ] Add physical mass properties: `mass` and cache `invMass` ($1/	ext{mass}$) where static/unmovable bodies use an `invMass = 0.0f`.
-  - [ ] Add surface coefficients: `restitution` (bounciness clamp $0.0 \le e \le 1.0$) and `friction`.
+  - [ ] Add physical mass properties: `mass` and cache `invMass` (1.0 / mass) where static/unmovable bodies use an `invMass = 0.0f`.
+  - [ ] Add surface coefficients: `restitution` (bounciness clamp between 0.0 and 1.0) and `friction`.
 - [ ] **Shape Definitions (Variant Tag/Union Pattern)**
   - [ ] Design an enum tag for shape classification (e.g., `SHAPE_CIRCLE`, `SHAPE_BOX`).
   - [ ] Implement shape structures:
@@ -47,9 +47,9 @@ This technical roadmap outlines the complete architecture, memory layouts, and p
 - [ ] **The Semi-Implicit Euler Integrator**
   - [ ] Implement physics state step function accepting a discrete `float dt` time interval.
   - [ ] For every non-static body:
-    - [ ] Compute current acceleration: $ec{a} = ec{g} + (ec{F}_{	ext{accumulated}} 	imes 	ext{invMass})$.
-    - [ ] Update velocity: $ec{v} = ec{v} + ec{a} \cdot dt$.
-    - [ ] Update position: $ec{x} = ec{x} + ec{v} \cdot dt$.
+    - [ ] Compute current acceleration: `a = gravity + (forceAccumulator * invMass)`
+    - [ ] Update velocity: `v = v + a * dt`
+    - [ ] Update position: `x = x + v * dt`
     - [ ] Zero out `forceAccumulator` array inputs to prepare for the next tick frame loop.
 - [ ] **Fixed Time Step Loop Accumulator**
   - [ ] Build a main program simulation wrapper that locks execution updates.
@@ -77,20 +77,23 @@ This technical roadmap outlines the complete architecture, memory layouts, and p
   - [ ] Implement a method to shift bodies backwards along the manifold normal using their relative inverse mass parameters.
   - [ ] Introduce a scalar percentage factor (commonly called a "slop factor" between 20% to 80%) to stop jitter artifacts on objects resting flush against floors.
 - [ ] **Impulse Resolution Solver**
-  - [ ] Calculate relative interface velocity vector: $ec{v}_{	ext{rel}} = ec{v}_B - ec{v}_A$.
-  - [ ] Extract projection velocity along the collision normal vector: $v_{	ext{normal}} = ec{v}_{	ext{rel}} \cdot ec{n}$.
-  - [ ] Early out check: If $v_{	ext{normal}} > 0$, shapes are already separating. Do not resolve.
-  - [ ] Calculate the impulse scalar value using restitution coefficient: $j = rac{-(1 + e)(ec{v}_{	ext{rel}} \cdot ec{n})}{	ext{invMass}_A + 	ext{invMass}_B}$.
+  - [ ] Calculate relative interface velocity vector: `v_rel = v_B - v_A`
+  - [ ] Extract projection velocity along the collision normal vector: `v_normal = v_rel • normal`
+  - [ ] Early out check: If `v_normal > 0`, shapes are already separating. Do not resolve.
+  - [ ] Calculate the impulse scalar value using restitution coefficient: `j = -(1 + e) * v_normal / (invMass_A + invMass_B)`
   - [ ] Update target linear velocity parameters immediately using impulse direction scales:
-    - [ ] $ec{v}_A = ec{v}_A - (j \cdot 	ext{invMass}_A) \cdot ec{n}$
-    - [ ] $ec{v}_B = ec{v}_B + (j \cdot 	ext{invMass}_B) \cdot ec{n}$
+    - [ ] `v_A = v_A - (j * invMass_A) * normal`
+    - [ ] `v_B = v_B + (j * invMass_B) * normal`
 
 ---
 
-## Phase 6: Graphics Subsystem Integration
-*Deferred completely to the final stage.*
+## Phase 6: Pure Data Validation (No Graphics)
+*Verifying engine accuracy entirely through the console.*
 
-- [ ] **Engine State Decoupled Rendering Wrapper**
-  - [ ] Implement a simple wrapper to pass data blocks from the engine arrays out to an isolated graphics API layer.
-  - [ ] Map engine vector coordinate axes onto window pixel screenspace scales.
-  - [ ] Write dynamic basic shape primitives drawing functions (e.g., rasterizing plain colored square wireframes and lines for tracking radii/normals visually using tools like Raylib, SDL2, or OpenGL).
+- [ ] **Console-Based State Logging**
+  - [ ] Create a telemetry logger function: `LogWorldState(World* world, float totalSimTime)`.
+  - [ ] Format outputs neatly to show critical scalar metrics (`[Time: 2.45s] Body 0 - Pos: (0.00, 4.21), Vel: (0.00, -9.81)`).
+- [ ] **Unit Test Verification Scenarios**
+  - [ ] Test 1: Single body dropping under constant gravity. Verify freefall equations ($y = 0.5 \cdot g \cdot t^2$) match data precisely.
+  - [ ] Test 2: Perfect elastic collision ($e = 1.0$) between two identical circle masses. Verify total kinetic energy is perfectly conserved before and after impact.
+  - [ ] Test 3: Static boundary floor test. Verify a dropping ball hits a heavy unmovable platform (`invMass = 0.0f`), rebounds, and settles cleanly without falling through the floor or jittering uncontrollably.

@@ -9,6 +9,7 @@ obj/
 
 # IDE/Editor 
 .vscode/
+.vs/
 
 # OS
 Thumbs.db
