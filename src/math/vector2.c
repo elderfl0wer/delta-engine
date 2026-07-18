@@ -67,3 +67,9 @@ vec3 vec2_cross(vec2 *a, vec2 *b)
 
     return ans;
 }
+
+double vec2_distance(vec2 *a, vec2 *b)
+{
+    vec2 ans = vec2_subtract(a, b);
+    return vec2_length(&ans);
+}
