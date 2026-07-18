@@ -19,6 +19,6 @@ int main()
     printf("Normalized first vector (%f, %f)\n", normalizedFirst.x, normalizedFirst.y);
 
     vec3 crossv = vec2_cross(&firstVector, &secondVector);
-    printf("inf check of cross Z %f\n", isnan(crossv.z));
+    printf("inf check of cross Z %d\n", isinf(crossv.z));
     printf("Cross of the first & second vectors is (%f, %f, %f)", crossv.x, crossv.y, crossv.z);
 }
