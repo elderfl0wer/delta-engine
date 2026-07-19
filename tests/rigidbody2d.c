@@ -6,5 +6,5 @@
 
 int main(void)
 {
-    printf("Makefile worked");
+
 }

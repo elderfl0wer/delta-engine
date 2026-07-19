@@ -29,6 +29,6 @@ typedef struct {
     vec2 position;
 } Point;
 
-RigidBody2D rb2d_apply_force(RigidBody2D *rb, vec2 force);
+void rb2d_apply_force(RigidBody2D *rb, vec2 force);
 
 #endif /* RIGIDBODY2D_H */
