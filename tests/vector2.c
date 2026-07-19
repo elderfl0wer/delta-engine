@@ -4,7 +4,7 @@
 #include "../include/delta/math/vector2.h"
 #include "../include/delta/math/vector3.h"
 
-int main()
+int main(void)
 {
     vec2 firstVector = {2, 30};
     vec2 secondVector = {-10, 4};

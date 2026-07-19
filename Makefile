@@ -2,7 +2,7 @@ CC = clang
 CFLAGS = -Iinclude -Wall -Wextra -Wpedantic
 LDFLAGS = -Xlinker /subsystem:console
 
-all: vector2 vector3
+all: vector2 vector3 rigidbody2d
 
 vector2:
 	$(CC) $(CFLAGS) \
@@ -18,5 +18,13 @@ vector3:
 		tests/vector3.c \
 		-o tests/vector3.exe $(LDFLAGS)
 
+rigidbody2d:
+	$(CC) $(CFLAGS) \
+		src/math/vector3.c \
+		src/math/vector2.c \
+		src/physics/rigidbody2d.c \
+		tests/rigidbody2d.c \
+		-o tests/vector3.exe $(LDFLAGS)
+
 clean:
-	del tests\*.exe
+	rm -f tests/*.exe
