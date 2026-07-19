@@ -16,12 +16,16 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "../../include/delta/physics/rigidbody2d.h"
 #include "../../include/delta/math/vector3.h"
 #include "../../include/delta/math/vector2.h"
+#include "../../include/delta/physics/rigidbody2d.h"
 
 void rb2d_apply_force(RigidBody2D *rb, vec2 force)
 {
     rb->force.x += force.x;
     rb->force.y += force.y;
+}
+
+void rb2d_update_position(RigidBody2D *rb)
+{   
 }

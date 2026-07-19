@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -Iinclude -Wall -Wextra -Wpedantic
+CFLAGS = -Iinclude -Wall -Wextra -Wpedantic -O2
 LDFLAGS = -Xlinker /subsystem:console
 
 all: vector2 vector3 rigidbody2d
