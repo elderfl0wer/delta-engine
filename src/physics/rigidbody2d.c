@@ -17,10 +17,13 @@
 */
 
 #include "../../include/delta/physics/rigidbody2d.h"
+#include "../../include/delta/math/vector3.h"
+#include "../../include/delta/math/vector2.h"
 
 RigidBody2D rb2d_apply_force(RigidBody2D *rb, vec2 force)
 {
-  rb->force += force;
+  vec2 test = {5, 6};
+  rb->position = test;
 
   return *rb;
 } 

@@ -24,7 +24,7 @@ rigidbody2d:
 		src/math/vector2.c \
 		src/physics/rigidbody2d.c \
 		tests/rigidbody2d.c \
-		-o tests/vector3.exe $(LDFLAGS)
+		-o tests/rigidbody2d.exe $(LDFLAGS)
 
 clean:
 	rm -f tests/*.exe
