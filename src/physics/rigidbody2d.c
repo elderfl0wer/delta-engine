@@ -19,6 +19,7 @@
 #include "../../include/delta/math/vector3.h"
 #include "../../include/delta/math/vector2.h"
 #include "../../include/delta/physics/rigidbody2d.h"
+#include "../../include/delta/constants.h"
 
 void rb2d_apply_force(RigidBody2D *rb, vec2 force)
 {
@@ -42,4 +43,9 @@ void rb2d_apply_accel(RigidBody2D *rb, vec2 accel)
 {
     rb->acceleration.x += accel.x;
     rb->acceleration.y += accel.y;
+}
+
+void rb2d_accumulate_gravity(RigidBody2D *rb)
+{
+    rb->force.y += ACCEL_EARTH_GRAVITY;
 }
