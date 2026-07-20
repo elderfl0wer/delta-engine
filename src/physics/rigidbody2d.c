@@ -53,4 +53,6 @@ void rb2d_accumulate_gravity(RigidBody2D *rb)
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 {
     double object_seperation = vec2_distance(&a->position, &b->position);
+
+    
 }

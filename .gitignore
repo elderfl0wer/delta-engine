@@ -14,4 +14,7 @@ obj/
 # OS
 Thumbs.db
 
+# Temporary
+scratch.txt
+
 
