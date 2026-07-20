@@ -47,7 +47,7 @@ void rb2d_apply_accel(RigidBody2D *rb, vec2 accel)
 
 void rb2d_accumulate_gravity(RigidBody2D *rb)
 {
-    rb->force.y += ACCEL_EARTH_GRAVITY;
+    rb->acceleration.y += ACCEL_EARTH_GRAVITY;
 }
 
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
