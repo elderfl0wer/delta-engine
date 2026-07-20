@@ -6,5 +6,7 @@
 
 int main(void)
 {
-
+do {
+rb
+}while ()
 }

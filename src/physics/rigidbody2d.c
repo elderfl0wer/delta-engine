@@ -26,6 +26,14 @@ void rb2d_apply_force(RigidBody2D *rb, vec2 force)
     rb->force.y += force.y;
 }
 
-void rb2d_update_position(RigidBody2D *rb)
-{   
+void rb2d_update_position(RigidBody2D *rb, double dt)
+{
+    double accel_x = rb->force.x / rb->mass;
+    double accel_y = rb->force.y / rb->mass;
+
+    rb->velocity.x += accel_x * dt;
+    rb->velocity.y += accel_y * dt;
+
+    rb->force.x = 0;
+    rb->force.y = 0;
 }
