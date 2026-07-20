@@ -37,3 +37,9 @@ void rb2d_update_position(RigidBody2D *rb, double dt)
     rb->force.x = 0;
     rb->force.y = 0;
 }
+
+void rb2d_apply_accel(RigidBody2D *rb, vec2 accel)
+{
+    rb->acceleration.x += accel.x;
+    rb->acceleration.y += accel.y;
+}
