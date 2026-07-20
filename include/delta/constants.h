@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 // Physics
-#define ACCEL_EARTH_GRAVITY -9.80665f
+#define FREE_FALL_ACCEL -9.80665f
+#define VACUUM_PERMITIVITY
 
 #endif /* CONSTANTS_H */

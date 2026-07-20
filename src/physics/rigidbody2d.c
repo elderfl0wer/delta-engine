@@ -47,10 +47,10 @@ void rb2d_apply_accel(RigidBody2D *rb, vec2 accel)
 
 void rb2d_accumulate_gravity(RigidBody2D *rb)
 {
-    rb->acceleration.y += ACCEL_EARTH_GRAVITY;
+    rb->acceleration.y += FREE_FALL_ACCEL;
 }
 
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 {
-    double X_distance = vec2_distance(a->position, b->position);
+    double object_seperation = vec2_distance(&a->position, &b->position);
 }
