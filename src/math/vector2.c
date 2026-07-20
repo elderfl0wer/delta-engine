@@ -71,18 +71,4 @@ double vec2_distance(vec2 *a, vec2 *b)
     return vec2_length(&ans);
 }
 
-double vec2_horizontal_angle(vec2 *v)
-{
-    vec2 horizontal = {1, 0};
-    double ans = acos(vec2_dot(v, &horizontal) / (vec2_length(v)*vec2_length(&horizontal)));
 
-    return ans;
-}
-
-double vec2_vertical_angle(vec2 *v)
-{
-    vec2 vertical = {0, 1};
-    double ans = acos(vec2_dot(v, &vertical) / (vec2_length(v)*vec2_length(&vertical)));
-
-    return ans;
-}
