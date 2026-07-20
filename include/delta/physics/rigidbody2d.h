@@ -32,5 +32,6 @@ typedef struct {
 void rb2d_apply_force(RigidBody2D *rb, vec2 force);
 void rb2d_update_position(RigidBody2D *rb, double dt);
 void rb2d_apply_accel(RigidBody2D *rb, vec2 accel);
+void rb2d_accumulate_gravity(RigidBody2D *rb);
 
 #endif /* RIGIDBODY2D_H */

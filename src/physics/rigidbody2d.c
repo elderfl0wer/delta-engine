@@ -49,3 +49,8 @@ void rb2d_accumulate_gravity(RigidBody2D *rb)
 {
     rb->force.y += ACCEL_EARTH_GRAVITY;
 }
+
+void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
+{
+    double X_distance = vec2_distance(a->position, b->position);
+}
