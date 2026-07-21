@@ -18,11 +18,16 @@
 
 #include <math.h>
 
-//
+/*
+ * 12:01 AM 22-07-2026
+ *
+ * I just turned 18 while writing this struct. Funny
+ *      - Shreyaan Misra, Adult
+ */
 typedef struct {
     double Xangle;
     double Yangle;
-} vec2_angles;
+} axisangles2d;
 
 #include "../../include/delta/math/vector2.h"
 #include "../../include/delta/math/vector3.h"
