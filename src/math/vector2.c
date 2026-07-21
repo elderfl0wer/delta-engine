@@ -18,6 +18,12 @@
 
 #include <math.h>
 
+//
+typedef struct {
+    double Xangle;
+    double Yangle;
+} vec2_angles;
+
 #include "../../include/delta/math/vector2.h"
 #include "../../include/delta/math/vector3.h"
 
@@ -76,4 +82,3 @@ dircos2 cosine_from_vec2(vec2 *v)
     dircos2 ans = {v->x / vec2_length(v), v->y / vec2_length(v)};
     return ans;
 }
-
