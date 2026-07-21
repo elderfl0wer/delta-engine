@@ -9,6 +9,11 @@ typedef struct vec2_tag {
     double y;
 } vec2;
 
+typedef struct {
+    double l;
+    double m;
+} dircos2;
+
 vec2 vec2_add(vec2 *a, vec2 *b);
 vec2 vec2_subtract(vec2 *a, vec2 *b);
 double vec2_length(vec2 *a);
