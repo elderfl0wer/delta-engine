@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+#include <math.h>
 
 #include "../../include/delta/math/vector3.h"
 #include "../../include/delta/math/vector2.h"
@@ -52,7 +53,10 @@ void rb2d_accumulate_gravity(RigidBody2D *rb)
 
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 {
-    double object_seperation = vec2_distance(&a->position, &b->position);
+    double object_seperation = pow(vec2_distance(&a->position, &b->position), 2);
+
+    double force_magnitude = GRAVITATIONAL_CONSTANT * ((a->mass * b->mass) / object_seperation);
+
 
 
 }
