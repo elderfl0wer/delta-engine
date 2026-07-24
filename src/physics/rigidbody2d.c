@@ -36,6 +36,9 @@ void rb2d_update_position(RigidBody2D *rb, double dt)
     rb->velocity.x += accel_x * dt;
     rb->velocity.y += accel_y * dt;
 
+    rb->position.x += rb->velocity.x * dt;
+    rb->position.y += rb->velocity.y * dt;
+
     rb->force.x = 0;
     rb->force.y = 0;
 }

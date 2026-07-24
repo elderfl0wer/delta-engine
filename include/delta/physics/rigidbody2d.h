@@ -5,6 +5,7 @@
 
 typedef struct {
     double mass;
+    double charge;
     double inv_mass;
 
     vec2 position;
