@@ -59,10 +59,11 @@ void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 
     vec2 force_point = {(a->position.x*a->mass + b->position.x*b->mass) / (a->mass+b->mass), (a->position.y*a->mass + b->position.y*b->mass) / (a->mass+b->mass)};
     const double force_point_length = vec2_length(&force_point);
+    if (force_point_length < COLLISION_SEPERATION) return;
 
     a->force.x += force_magnitude * (force_point.x / force_point_length);
     a->force.y += force_magnitude * (force_point.y / force_point_length);
 
-    b->force.x += force_magnitude * (force_point.x / force_point_length);
-    b->force.y += force_magnitude * (force_point.y / force_point_length);
+    b->force.x -= force_magnitude * (force_point.x / force_point_length);
+    b->force.y -= force_magnitude * (force_point.y / force_point_length);
 }

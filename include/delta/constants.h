@@ -2,6 +2,8 @@
 #define CONSTANTS_H
 #include <math.h>
 
+#define COLLISION_SEPERATION 0.01f
+
 // Physics
 #define FREE_FALL_ACCEL -9.80665f
 #define GRAVITATIONAL_CONSTANT (6.6743f*(pow(10, -11)))
