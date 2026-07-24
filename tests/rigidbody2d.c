@@ -9,21 +9,41 @@
 
 int main(void)
 {
-    int i = 0; 
-
     RigidBody2D b1;
     b1.mass = 10;
+    b1.charge = FUNDAMENTAL_CHARGE;
+    b1.inv_mass = 1 / b1.mass;
+
     b1.position.x = 10; b1.position.y = 20;
-    b1.force.x = 0; b1.force.y = 5;
+    b1.velocity.x = 0; b1.velocity.y = 0;
+    b1.acceleration.x = 0; b1.acceleration.y = 0;
+    b1.force.x = 0; b1.force.y = 0;
+
+
+    RigidBody2D b2;
+    b2.mass = 100;
+    b1.charge = -FUNDAMENTAL_CHARGE;
+    b1.inv_mass = 1 / b1.mass;
+
+    b1.position.x = 20; b1.position.y = 20;
+    b1.velocity.x = 0; b1.velocity.y = 0;
+    b2.acceleration.x = 0; b2.acceleration.y = 0;
+    b2.force.x = 0; b2.force.y = 0;
 
     do {
+        rb2d_update_position(&b1, UPDATE_TIME);
         printf("b1's initial position is (%f, %f)\n", b1.position.x, b1.position.y);
 
-        rb2d_accumulate_gravity(&b1);
+        rb2d_object_gravity(&b1, &b2);     
+        rb2d_update_position(&b1, UPDATE_TIME);
 
-        printf("b1's final position is (%f, %f)\n", b1.position.x, b1.position.y);
+        printf("b1's final position is (%f, %f)\n\n", b1.position.x, b1.position.y);
 
         rb2d_update_position(&b1, UPDATE_TIME);
-        i += 1;
-    } while (i < 1);
+
+        if (b1.position.y <= 0) {
+
+            break;
+        }
+    } while (true);
 }
