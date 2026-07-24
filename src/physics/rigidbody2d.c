@@ -53,10 +53,16 @@ void rb2d_accumulate_gravity(RigidBody2D *rb)
 
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 {
-    double object_seperation = pow(vec2_distance(&a->position, &b->position), 2);
+    double object_seperation = vec2_distance(&a->position, &b->position);
 
-    double force_magnitude = GRAVITATIONAL_CONSTANT * ((a->mass * b->mass) / object_seperation);
+    double force_magnitude = GRAVITATIONAL_CONSTANT * ((a->mass * b->mass) / pow(object_seperation, 2));
 
+    vec2 force_point = {(b->mass*a->position.x - a->mass*b->position.x)/(a->mass+b->mass), (b->mass*a->position.y - a->mass*b->position.y)/(a->mass+b->mass)};
+    const double force_point_length = vec2_length(&force_point);
 
+    a->force.x += force_magnitude * (force_point.x / force_point_length);
+    a->force.y += force_magnitude * (force_point.y / force_point_length);
 
+    b->force.x += force_magnitude * (force_point.x / force_point_length);
+    b->force.y += force_magnitude * (force_point.y / force_point_length);
 }
