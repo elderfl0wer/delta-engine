@@ -57,7 +57,7 @@ void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 
     double force_magnitude = GRAVITATIONAL_CONSTANT * ((a->mass * b->mass) / pow(object_seperation, 2));
 
-    vec2 force_point = {(b->mass*a->position.x - a->mass*b->position.x)/(a->mass+b->mass), (b->mass*a->position.y - a->mass*b->position.y)/(a->mass+b->mass)};
+    vec2 force_point = {(a->position.x*a->mass + b->position.x*b->mass) / (a->mass+b->mass), (a->position.y*a->mass + b->position.y*b->mass) / (a->mass+b->mass)};
     const double force_point_length = vec2_length(&force_point);
 
     a->force.x += force_magnitude * (force_point.x / force_point_length);
