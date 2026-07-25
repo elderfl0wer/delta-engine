@@ -81,5 +81,6 @@ void rb2d_object_destroy(RigidBody2D **rb)
 {
     if (rb == NULL || *rb == NULL) return;
 
-    free(rb);
+    free(*rb);
+    *rb = NULL;
 }
