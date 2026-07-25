@@ -24,6 +24,8 @@
 #include "../../include/delta/physics/rigidbody2d.h"
 #include "../../include/delta/constants.h"
 
+// --------------------- General ------------------------------ //
+
 void rb2d_apply_force(RigidBody2D *rb, vec2 force)
 {
     rb->force.x += force.x;
@@ -50,6 +52,23 @@ void rb2d_apply_accel(RigidBody2D *rb, vec2 accel)
     rb->acceleration.x += accel.x;
     rb->acceleration.y += accel.y;
 }
+
+// ----------------------------------------------------------- //
+
+void rb2d_object_destroy(RigidBody2D **rb)
+{
+    if (rb == NULL || *rb == NULL) return;
+
+    free(*rb);
+    *rb = NULL;
+}
+
+bool rb2d_check_collision(RigidBody2D *a, RigidBody2D *b)
+{
+    return vec2_distance(&a->position, &b->position) <= COLLISION_SEPERATION ? true : false;
+}
+
+// --------------------- Gravity ------------------------------ //
 
 void rb2d_accumulate_gravity(RigidBody2D *rb)
 {
@@ -78,15 +97,4 @@ void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
     b->force.y -= force_magnitude * (force_point.y / force_point_length);
 }
 
-void rb2d_object_destroy(RigidBody2D **rb)
-{
-    if (rb == NULL || *rb == NULL) return;
-
-    free(*rb);
-    *rb = NULL;
-}
-
-bool rb2d_check_collision(RigidBody2D *a, RigidBody2D *b)
-{
-    return vec2_distance(&a->position, &b->position) <= COLLISION_SEPERATION ? true : false;
-}
+// -------------------Electrical Force------------------------- //
