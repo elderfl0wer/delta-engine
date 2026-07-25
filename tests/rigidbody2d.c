@@ -5,12 +5,12 @@
 #include "../include/delta/physics/rigidbody2d.h"
 #include "../include/delta/math/vector2.h"
 
-#define UPDATE_TIME 0.00001f
+#define UPDATE_TIME 10
 
 int main(void)
 {
     RigidBody2D b1;
-    b1.mass = 10;
+    b1.mass = 10000000;
     b1.charge = FUNDAMENTAL_CHARGE;
     b1.inv_mass = 1 / b1.mass;
 
@@ -21,7 +21,7 @@ int main(void)
 
 
     RigidBody2D b2;
-    b2.mass = 100;
+    b2.mass = 900000000000;
     b2.charge = -FUNDAMENTAL_CHARGE;
     b2.position.x = 20; b1.position.y = 20;
     b2.velocity.x = 0; b1.velocity.y = 0;

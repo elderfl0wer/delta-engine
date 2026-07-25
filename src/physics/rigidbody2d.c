@@ -17,6 +17,7 @@
 */
 #include <math.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "../../include/delta/math/vector3.h"
 #include "../../include/delta/math/vector2.h"
@@ -83,4 +84,9 @@ void rb2d_object_destroy(RigidBody2D **rb)
 
     free(*rb);
     *rb = NULL;
+}
+
+bool rb2d_check_collision(RigidBody2D *a, RigidBody2D *b)
+{
+    return vec2_distance(&a->position, &b->position) <= COLLISION_SEPERATION ? true : false;
 }
