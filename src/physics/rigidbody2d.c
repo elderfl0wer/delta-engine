@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 #include <math.h>
+#include <stdlib.h>
 
 #include "../../include/delta/math/vector3.h"
 #include "../../include/delta/math/vector2.h"
@@ -51,11 +52,16 @@ void rb2d_apply_accel(RigidBody2D *rb, vec2 accel)
 
 void rb2d_accumulate_gravity(RigidBody2D *rb)
 {
+    if (rb == NULL) return; 
+
     rb->force.y += rb->mass * FREE_FALL_ACCEL;
 }
 
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 {
+    if (a == NULL) return;
+    if (b == NULL) return;
+
     double object_seperation = vec2_distance(&a->position, &b->position);
 
     double force_magnitude = GRAVITATIONAL_CONSTANT * ((a->mass * b->mass) / pow(object_seperation, 2));
@@ -69,4 +75,11 @@ void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 
     b->force.x -= force_magnitude * (force_point.x / force_point_length);
     b->force.y -= force_magnitude * (force_point.y / force_point_length);
+}
+
+void rb2d_object_destroy(RigidBody2D **rb)
+{
+    if (rb == NULL || *rb == NULL) return;
+
+    free(rb);
 }
