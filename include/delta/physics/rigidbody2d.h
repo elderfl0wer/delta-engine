@@ -36,5 +36,6 @@ void rb2d_apply_accel(RigidBody2D *rb, vec2 accel);
 void rb2d_accumulate_gravity(RigidBody2D *rb);
 void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b);
 bool rb2d_check_collision(RigidBody2D *a, RigidBody2D *b);
+void rb2d_coloumb_force(RigidBody2D *a, RigidBody2D *b);
 
 #endif /* RIGIDBODY2D_H */
