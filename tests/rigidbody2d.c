@@ -28,7 +28,7 @@ int main(void)
     RigidBody2D b1 = {
         .mass = 1e12,
         .inv_mass = 1.0 / 1e12,
-        .charge = FUNDAMENTAL_CHARGE,
+        .charge = 100,
         .position = {0, 0},
         .velocity = {0, 0},
         .acceleration = {0, 0},
@@ -38,7 +38,7 @@ int main(void)
     RigidBody2D b2 = {
         .mass = 1e12,
         .inv_mass = 1.0 / 1e12,
-        .charge = -FUNDAMENTAL_CHARGE,
+        .charge = -10000,
         .position = {5, 0},
         .velocity = {0, 0},
         .acceleration = {0, 0},
@@ -52,7 +52,8 @@ int main(void)
         printf("========== Step %d ==========\n", step);
 
         /* Compute forces */
-        rb2d_object_gravity(&b1, &b2);
+        // rb2d_object_gravity(&b1, &b2);
+        rb2d_coloumb_force(&b1, &b2);
 
         /* Integrate */
         rb2d_update_position(&b1, DT);
