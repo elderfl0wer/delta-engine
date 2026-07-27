@@ -5,8 +5,9 @@
 #include "../include/delta/math/vector2.h"
 #include "../include/delta/physics/rigidbody2d.h"
 
-#define DT 0.1
-#define MAX_STEPS 10000
+#define DT 4e-6
+#define MAX_STEPS 3000000
+#define PRINT_EVERY 100
 
 static void print_body(const char *name, const RigidBody2D *rb)
 {
@@ -26,20 +27,20 @@ static void print_body(const char *name, const RigidBody2D *rb)
 int main(void)
 {
     RigidBody2D b1 = {
-        .mass = 1e12,
-        .inv_mass = 1.0 / 1e12,
-        .charge = 100,
-        .position = {0, 0},
+        .mass = 2.0,
+        .inv_mass = 1.0 / 2.0,
+        .charge = 9e-4,
+        .position = {-0.27, 0.11},
         .velocity = {0, 0},
         .acceleration = {0, 0},
         .force = {0, 0},
     };
 
     RigidBody2D b2 = {
-        .mass = 1e12,
-        .inv_mass = 1.0 / 1e12,
-        .charge = -10000,
-        .position = {5, 0},
+        .mass = 9.0,
+        .inv_mass = 1.0 / 9.0,
+        .charge = -9e-4,
+        .position = {0.44, 0.33},
         .velocity = {0, 0},
         .acceleration = {0, 0},
         .force = {0, 0},
@@ -49,8 +50,6 @@ int main(void)
 
     for (int step = 0; step < MAX_STEPS; ++step)
     {
-        printf("========== Step %d ==========\n", step);
-
         /* Compute forces */
         // rb2d_object_gravity(&b1, &b2);
         rb2d_coloumb_force(&b1, &b2);
@@ -60,13 +59,19 @@ int main(void)
         rb2d_update_position(&b2, DT);
 
         /* Debug output */
-        print_body("Body 1", &b1);
-        print_body("Body 2", &b2);
+        if (step % PRINT_EVERY == 0)
+        {
+            printf("========== Step %d ==========\n", step);
+            print_body("Body 1", &b1);
+            print_body("Body 2", &b2);
+        }
 
         /* Collision */
         if (rb2d_check_collision(&b1, &b2))
         {
-            puts("Bodies collided!");
+            printf("Bodies collided! (step %d)\n", step);
+            print_body("Body 1", &b1);
+            print_body("Body 2", &b2);
             break;
         }
     }
