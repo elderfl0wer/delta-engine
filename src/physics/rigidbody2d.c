@@ -84,15 +84,18 @@ void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b)
 
     double force_magnitude = GRAVITATIONAL_CONSTANT * ((a->mass * b->mass) / pow(object_seperation, 2));
 
-    vec2 force_point = {(a->position.x*a->mass + b->position.x*b->mass) / (a->mass+b->mass), (a->position.y*a->mass + b->position.y*b->mass) / (a->mass+b->mass)};
+    vec2 force_point = vec2_subtract(&b->position, &a->position);
     const double force_point_length = vec2_length(&force_point);
     if (object_seperation < COLLISION_SEPERATION) return;
 
-    a->force.x += force_magnitude * (force_point.x / force_point_length);
-    a->force.y += force_magnitude * (force_point.y / force_point_length);
+    force_point.x /= object_seperation;
+    force_point.y /= object_seperation;
 
-    b->force.x -= force_magnitude * (force_point.x / force_point_length);
-    b->force.y -= force_magnitude * (force_point.y / force_point_length);
+    a->force.x += force_magnitude * force_point.x;
+    a->force.y += force_magnitude * force_point.y;
+
+    b->force.x -= force_magnitude * force_point.x;
+    b->force.y -= force_magnitude * force_point.y;
 }
 
 // -------------------Electrical Force------------------------- //
@@ -106,14 +109,16 @@ void rb2d_coloumb_force(RigidBody2D *a, RigidBody2D *b)
 
     double force_magnitude = COLOUMB_CONSTANT * ((a->charge * b->charge) / pow(object_seperation, 2));
 
-    vec2 force_point = {(a->position.x*a->mass + b->position.x*b->mass) / (a->mass+b->mass), (a->position.y*a->mass + b->position.y*b->mass) / (a->mass+b->mass)};
+    vec2 force_point = vec2_subtract(&b->position, &a->position);
     const double force_point_length = vec2_length(&force_point);
     if (object_seperation < COLLISION_SEPERATION) return;
 
-    a->force.x += force_magnitude * (force_point.x / force_point_length);
-    a->force.y += force_magnitude * (force_point.y / force_point_length);
+    force_point.x /= object_seperation;
+    force_point.y /= object_seperation;
 
-    b->force.x -= force_magnitude * (force_point.x / force_point_length);
-    b->force.y -= force_magnitude * (force_point.y / force_point_length);
+    a->force.x += force_magnitude * force_point.x;
+    a->force.y += force_magnitude * force_point.y;
 
+    b->force.x -= force_magnitude * force_point.x;
+    b->force.y -= force_magnitude * force_point.y;
 }
