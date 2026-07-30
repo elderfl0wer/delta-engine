@@ -120,3 +120,10 @@ void rb2d_coloumb_force(RigidBody2D *a, RigidBody2D *b)
     b->force.x -= force_magnitude * force_point.x;
     b->force.y -= force_magnitude * force_point.y;
 }
+
+// --------------------- Energy ------------------------------ //
+
+double rb2d_get_kinetic_energy(RigidBody2D *rb)
+{
+    return 0.5 * rb->mass * pow(vec2_length(&rb->velocity), 2);
+}
