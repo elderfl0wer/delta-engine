@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+#include <cmath>
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -64,6 +65,45 @@ void rb2d_object_destroy(RigidBody2D **rb)
 bool rb2d_check_collision(RigidBody2D *a, RigidBody2D *b)
 {
     return vec2_distance(&a->position, &b->position) <= COLLISION_SEPERATION ? true : false;
+}
+
+bool rb2d_safety_check(RigidBody2D *rb)
+{
+    if (rb->mass < 0 || isinf(rb->mass) != 0) {
+        return false;
+    }
+    if (isinf(rb->inv_mass) != 0 || isnan(rb->inv_mass) != 0) {
+        return false;
+    }
+    if (isnan(rb->charge) != 0 || isinf(rb->charge) != 0) {
+        return false;
+    }
+    if (isnan(rb->position.x) != 0 || isnan(rb->position.y) != 0) {
+        return false;
+    }
+    if (isinf(rb->position.x) != 0 || isinf(rb->position.y) != 0) {
+        return false;
+    }
+    if (isnan(rb->velocity.x) != 0 || isnan(rb->velocity.y) != 0) {
+        return false;
+    }
+    if (isinf(rb->velocity.x) != 0 || isinf(rb->velocity.y) != 0) {
+        return false;
+    }
+    if (isnan(rb->acceleration.x) != 0 || isnan(rb->acceleration.y) != 0) {
+        return false;
+    }
+    if (isinf(rb->acceleration.x) != 0 || isinf(rb->acceleration.y) != 0) {
+        return false;
+    }
+    if (isnan(rb->force.x) != 0 || isnan(rb->force.y) != 0) {
+        return false;
+    }
+    if (isinf(rb->force.x) != 0 || isinf(rb->force.y) != 0) {
+        return false;
+    }
+
+    return false;
 }
 
 // --------------------- Gravity ------------------------------ //

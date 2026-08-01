@@ -18,7 +18,7 @@ all: vector2 vector3 rigidbody2d
 lib: static
 
 static: build $(OBJ)
-	$(AR) rcs build/libdelta.a $(OBJ)
+	$(AR) rcs build/delta.lib $(OBJ)
 
 build:
 	mkdir -p build/math build/physics
