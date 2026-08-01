@@ -15,7 +15,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-#include <cmath>
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -24,6 +23,7 @@
 #include "../../include/delta/math/vector2.h"
 #include "../../include/delta/physics/rigidbody2d.h"
 #include "../../include/delta/constants.h"
+#include "../../include/delta/physics/surface2d.h"
 
 // --------------------- General ------------------------------ //
 
@@ -166,4 +166,12 @@ void rb2d_coloumb_force(RigidBody2D *a, RigidBody2D *b)
 double rb2d_get_kinetic_energy(RigidBody2D *rb)
 {
     return 0.5 * rb->mass * pow(vec2_length(&rb->velocity), 2);
+}
+
+double rb2d_energy_after_collision(RigidBody2D *rb, Surface2D *s)
+{
+    double rb_kinetic_energy = rb2d_get_kinetic_energy(rb);
+    double mutual_angle = vec2_mutual_angle(&rb->velocity, &s->vector);
+
+    return rb_kinetic_energy * ((s->restitution*s->restitution*cos(mutual_angle)*cos(mutual_angle)) + sin(mutual_angle)*sin(mutual_angle));
 }

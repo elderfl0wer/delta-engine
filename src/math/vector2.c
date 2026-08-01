@@ -87,3 +87,8 @@ dircos2 cosine_from_vec2(vec2 *v)
     dircos2 ans = {v->x / vec2_length(v), v->y / vec2_length(v)};
     return ans;
 }
+
+double vec2_mutual_angle(vec2 *a, vec2 *b)
+{
+    return cosh(vec2_dot(a, b) / (vec2_length(a)*vec2_length(b)));
+}

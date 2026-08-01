@@ -2,6 +2,7 @@
 #define RIGIDBODY2D_H
 
 #include "../math/vector2.h"
+#include "surface2d.h"
 
 typedef struct {
     double mass;
@@ -38,5 +39,7 @@ void rb2d_object_gravity(RigidBody2D *a, RigidBody2D *b);
 bool rb2d_check_collision(RigidBody2D *a, RigidBody2D *b);
 void rb2d_coloumb_force(RigidBody2D *a, RigidBody2D *b);
 bool rb2d_safety_check(RigidBody2D *rb);
+double rb2d_energy_after_collision(RigidBody2D *rb, Surface2D *s);
+double rb2d_get_kinetic_energy(RigidBody2D *rb);
 
 #endif /* RIGIDBODY2D_H */
