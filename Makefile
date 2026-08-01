@@ -14,7 +14,8 @@ OBJ = \
 	build/math/vector3.o \
 	build/physics/rigidbody2d.o
 
-all: vector2 vector3 rigidbody2d
+all: vector2 vector3 rigidbody2d static
+tests: vector2 vector3 rigidbody2d
 lib: static
 
 static: build $(OBJ)
