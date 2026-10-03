@@ -4,6 +4,7 @@
 #include "../include/delta/constants.h"
 #include "../include/delta/math/vector2.h"
 #include "../include/delta/physics/rigidbody2d.h"
+#include "../include/delta/physics/surface2d.h"
 
 #define DT 4e-6
 #define MAX_STEPS 3000000

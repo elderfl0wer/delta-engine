@@ -103,7 +103,7 @@ bool rb2d_safety_check(RigidBody2D *rb)
         return false;
     }
 
-    return false;
+    return true;
 }
 
 // --------------------- Gravity ------------------------------ //
